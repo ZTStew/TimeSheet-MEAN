@@ -1,0 +1,46 @@
+{{ schedule | json }}
+{{ project | json }}
+{{ user | json }}
+
+<table>
+    <tr>
+        <td>Select Employee:</td>
+        <td>
+            <select>
+                <!-- <option>| - - - - - - - - - - - - - - - |</option> -->
+                <option *ngFor="let emp of allUsers">{{ emp.name }}</option>
+            </select>
+        </td>
+    </tr>
+
+    <tr>
+        <td>Employee Name:</td>
+        <td><input type="text" value="user.name" name="user.name" [(ngModel)] = "user.name"></td>
+       <!--  <td *ngIf="user.errors.name" class="errorz"><h4>
+            * {{ user.errors.name.message }}
+        </h4></td> -->
+        <td>
+            <form (submit)="createUser()">
+                <input type="submit" value="Add Employee">
+            </form> 
+        </td>
+    </tr>
+    <tr>
+        <td>Add Project:</td>
+        <td><input type="text" name="project.name" value = "project.name" [(ngModel)] = "project.name"></td>
+        <td><input type="text" value = "project.desc" name="project.desc" [(ngModel)] = "project.desc"></td>
+        <td>
+            <form (submit)="createProject()">
+                <input type="submit" value="Create Project">
+            </form> 
+        </td>
+    </tr>
+</table>
+
+<div class="control">
+    <label for="camp-week">Choose a week in July or August:</label>
+    <input type="week" name="camp-week" id="camp-week" required />
+</div>
+
+
+<router-outlet></router-outlet>
