@@ -1,6 +1,8 @@
-{{ schedule | json }}
-{{ project | json }}
-{{ user | json }}
+<p>Schedule: {{ schedule | json }}</p>
+<p>Project: {{ project | json }}</p>
+<p>Project List: {{ projectList | json }}</p>
+<p>User: {{ user | json }}</p>
+<p>Selected Project: {{ selectProj | json }}</p>
 
 <table id = table_id>
     <thead>
@@ -21,16 +23,13 @@
         <tr>
 
             <td>
-                <select>
-                    <option (click)="onSelectChange(undefined)">| - - - - - - - - - - - - - - - |</option>
-                    <option *ngFor="let proj of projectList" (click)="onSelectChange(proj)" value = "{{ proj }}">{{ proj.name }}</option>
+                <select (change)="projectSelector($event)">
+                    <option value = "undefined">| - - - - - - - - - - - |</option>
+                    <option *ngFor = "let proj of projectList" value = "{{proj._id}}">{{ proj.name }}</option>
                 </select>
             </td>
-            <td>{{ temp.desc }}</td>
-            <!-- <td *ngIf = "temp.desc">{{ temp.desc }}</td> -->
-            <!-- <td *ngIf = "temp.desc == undefined">| --- |</td> -->
-            <!-- <td *ngIf = "temp.desc == false">| --- |</td> -->
-            <!-- <td *ngIf = "temp.desc == null">| --- |</td> -->
+            <td *ngIf = "selectProj == undefined">| - - - |</td>
+            <td *ngIf = "selectProj">{{ selectProj.desc }}</td>
             <td>
                 <select name="schedule.sunday" [(ngModel)] = "schedule.sunday" value = "{{ schedule.sunday }}">
                     <option>0</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option><option>11</option><option>12</option><option>13</option><option>14</option><option>15</option><option>16</option><option>17</option><option>18</option><option>19</option><option>20</option><option>21</option><option>22</option><option>23</option><option>24</option>

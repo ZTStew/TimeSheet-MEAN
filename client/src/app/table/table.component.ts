@@ -13,7 +13,7 @@ declare var $:any;
 export class TableComponent implements OnInit {
     private userSchedules: any;
     private projectList: any;
-    private temp: any;
+    private selectProj: any;
 
     // private user: any;
     private project: any;
@@ -66,6 +66,7 @@ export class TableComponent implements OnInit {
         this.getProjects();
         this.getMatchingSchedules();
     }
+    
     getProjects(){
         this.us.allProjects(data=>this.projectList=data);
         // this.projectList.push(data);
@@ -74,11 +75,45 @@ export class TableComponent implements OnInit {
         this.us.allSchedules(data=>this.userSchedules=data);
     }
 
+    projectSelector(project: any){
+        this.selectProj = project.target.value;
+        if(this.selectProj == "undefined"){
+            this.selectProj = this.project;
+            this.selectProj.desc = "| - - - - - - - - - |";
+        } else {
+            for(let i  = 0; i<this.projectList.length; i++){
+                if(this.projectList[i]._id == this.selectProj){
+                    this.selectProj = this.projectList[i];
+                    break;
+                }
+            } 
+        }
+
+        // console.log(this.selectProj.proj);
+        // console.log(this.selectProj.name);
+        // console.log(this.selectProj.desc);
+        // console.log(project.target.value.name);
+        // console.log(proj);
+        // if(!project){
+        //     this.selectProj = undefined;
+        // } else {
+        //     this.selectProj = project;
+        // }
+        // let selectedProject = document.getElementById('projectSelect');
+        // let selectedProject = document.getElementById('projectSelect');
+        // let opt = selectedProject.options[selectedProject.selectedIndex];
+        // var opt = testerer.options[testerer.selectedIndex];
+        // console.log("Halp");
+        // console.log(opt);
+        // console.log(this.selectProj);
+        // console.log(project);
+    }
+
     onSelectChange(project){
         if(!project){
-            this.temp = undefined;
+            this.selectProj = undefined;
         } else {
-            this.temp = project;
+            this.selectProj = project;
         }
     }
 

@@ -1,6 +1,6 @@
-{{ schedule | json }}
-{{ project | json }}
-{{ user | json }}
+<p>User: {{ user | json }}</p>
+<p>Project: {{ project | json }}</p>
+<p>Schedule: {{ schedule | json }}</p>
 
 <table>
     <tr>
@@ -39,7 +39,7 @@
 
 <div class="control">
     <label for="camp-week">Choose a week in July or August:</label>
-    <input type="week" name="camp-week" id="camp-week" required />
+    <input type="week" name="camp-week" id="camp-week" required  (click)="selectWeek(undefined)"/>
 </div>
 
 

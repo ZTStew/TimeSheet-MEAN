@@ -12,10 +12,11 @@ declare var $:any;
 })
 export class AppComponent implements OnInit{
     private allUsers: any;
-    // private allProjects: any;
+    private selectedWeek: any;
 
     private user: any;
     private project: any;
+    private week: any;
     // private schedule: any;
 
     constructor(private us: TimeSheetService, private router:Router){
@@ -51,20 +52,21 @@ export class AppComponent implements OnInit{
         $(document).ready( function () {
             $('#table_id').DataTable();
         } );
-        $("p").click(function(){
-            console.log("Something Selected");
-        });
 
         this.getAllUsers();
         // this.getAllProjects();
+    }
+    selectWeek(week){
+        if(!week){
+            this.selectedWeek = undefined;
+        } else {
+            this.selectedWeek = week;
+        }
     }
 
     getAllUsers(){
         this.us.allUsers(data=>this.allUsers=data);
     }
-    // getAllProjects(){
-    //     this.us.allProjects(data=>this.allProjects=data);
-    // }
 
     createUser(){
         console.log("Here At Create User");
@@ -86,7 +88,7 @@ export class AppComponent implements OnInit{
             if(data.errors){
                 this.project.errors = data.errors;
             } else {
-                this.projectList.push(data);
+                // this.projectList.push(data);
                 this.project = { name:"", desc:"", errors: {} }
                 this.router.navigateByUrl("/");
             }
